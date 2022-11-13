@@ -23,7 +23,58 @@
 }
 #brain
 {
-    
+    margin: 9.5vh;
+    margin-top: 11.1vh;
+    margin-left: 66.5vw;
+}
+#liver
+{
+    margin: 9.5vh;
+    margin-top: 27vh;
+    margin-left: 13.3vw;
+}
+#heart
+{
+    margin: 9.5vh;
+    margin-top: 27vh;
+    margin-left: 74.6vw;
+}
+#kidney
+{
+    margin: 9.5vh;
+    margin-top: 44.9vh;
+    margin-left: 9vw;
+}
+#stomach
+{
+    margin: 9.5vh;
+    margin-top: 44.9vh;
+    margin-left: 79vw;
+}
+#pancreas
+{
+    margin: 9.5vh;
+    margin-top: 62.6vh;
+    margin-left: 9vw;
+
+}
+#malerep
+{
+    margin: 9.5vh;
+    margin-top: 62.6vh;
+    margin-left: 79vw;
+}
+#intestine
+{
+    margin: 9.5vh;
+    margin-top: 80.5vh;
+    margin-left: 17.4vw;
+}
+#femrep
+{
+    margin: 9.5vh;
+    margin-top: 80.5vh;
+    margin-left: 70.2vw;
 }
 .box
 {
@@ -33,7 +84,6 @@
     display: block;
     border-radius: 50%;
     display: inline-block;
-      
     /* transform: translate(-50%,-50%); */
 }
 
