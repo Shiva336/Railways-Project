@@ -1,17 +1,21 @@
-var lungCoordinate = [
-    
-];
+const box = document.getElementById("lungs");
+const c = box.getBoundingClientRect();
 
-document.addEventListener("touchmove", e => {
+
+var coordinates = [];
+coordinates.push(c);
+
+document.addEventListener("touchstart", e => {
     let X = Math.floor(e.touches[0].clientX);
     let Y = Math.floor(e.touches[0].clientY);
     
-    var found = lungCoordinate.findIndex((lung, index)=> {
-        if(lung.x == X && lung.y == Y)
+    var found = coordinates.findIndex((organ, index)=> {
+        if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
+        {
+            box.style.backgroundColor = "green";
             return true;
+        }
     })
-
-    // lungCoordinate.push({x:X,y:Y});
     console.log(found);
 })
 

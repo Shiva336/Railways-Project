@@ -3,8 +3,37 @@
 }
 .container
 {
-    width: 200px;
-    height: 300px;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    position: fixed;
 }
+
+.humanbody
+{
+    margin-left: 5vw;
+    width: 90vw;
+    height: 100vh;
+    position: absolute;
+}
+#lungs
+{
+    margin: 9.5vh;
+    margin-top: 11.1vh;
+    margin-left: 21.5vw;
+}
+#brain
+{
+    
+}
+.box
+{
+    width: 12vw;
+    height: 15.7vh;
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    display: inline-block;
+      
+    /* transform: translate(-50%,-50%); */
+}
+
