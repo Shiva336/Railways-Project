@@ -7,13 +7,24 @@
     height: 100vh;
     object-fit: cover;
 }
-
+.organs
+{
+    width: 50vw;
+    height:50vh;
+    position: fixed;
+}
 .humanbody
 {
     margin-left: 5vw;
     width: 90vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
+}
+.para
+{
+    margin-top: 55vh;
+    margin-left: 20vw ;
+    width: 20vw;
 }
 #lungs
 {

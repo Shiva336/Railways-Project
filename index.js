@@ -1,4 +1,5 @@
 const box = document.querySelector("div.box");
+const humanbody= document.querySelector("img.humanbody");
 const lungs = document.getElementById("lungs");
 const brain = document.getElementById("brain");
 const liver = document.getElementById("liver");
@@ -33,6 +34,33 @@ coordinates.push(c8);
 coordinates.push(c9);
 coordinates.push(c10);
 
+const description = [
+    "This is a lung", "This is a brain", "This is a liver",
+    "This is a heart", "This is a kidney","This is a stomach",
+    "This is a pancreas","This is a male reproductive system",
+    "This is an intestine","This is a female reproductive system"
+];
+
+const imageSource = [
+    "./pictures/lungs.jpg", "./pictures/brain.jpg", "./pictures/liver.jpg",
+    "./pictures/heart.jpg", "./pictures/kidney.jpg", "./pictures/stomach.jpg",
+    "./pictures/pancreas.jpg", "./pictures/male.jpg", "./pictures/intestine.jpg",
+    "./pictures/female.jpg",
+]
+
+function getOrgan(index){
+    const image = document.createElement("img");
+    image.classList.add("organs");
+    image.src = imageSource[index];
+    box.appendChild(image);
+
+    const para = document.createElement("p");
+    const text = document.createTextNode(description[index]);
+    para.appendChild(text);
+    para.classList.add("para");
+    box.appendChild(para);
+}
+
 document.addEventListener("touchstart", e => {
     let X = Math.floor(e.touches[0].clientX);
     let Y = Math.floor(e.touches[0].clientY);
@@ -40,45 +68,8 @@ document.addEventListener("touchstart", e => {
     var found = coordinates.findIndex((organ, index)=> {
         if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
         {
-            if(index == 0){
-                lungs.style.backgroundColor = "red";
-            }
-            else if(index == 1)
-            {
-                brain.style.backgroundColor = "red";
-            }
-            else if(index == 2)
-            {
-                liver.style.backgroundColor = "red";
-            }
-            else if(index == 3)
-            {
-                heart.style.backgroundColor = "red";
-            }
-            else if(index == 4)
-            {
-                kidney.style.backgroundColor = "red";
-            }
-            else if(index == 5)
-            {
-                stomach.style.backgroundColor = "red";
-            }
-            else if(index == 6)
-            {
-                pancreas.style.backgroundColor = "red";
-            }
-            else if(index == 7)
-            {
-                malerep.style.backgroundColor = "red";
-            }
-            else if(index == 8)
-            {
-                intestine.style.backgroundColor = "red";
-            }
-            else if(index == 9)
-            {
-                femrep.style.backgroundColor = "red";
-            }
+            humanbody.style.transform = "translate(-100%,-100%)";
+            getOrgan(index);
             return true;
         }
     })
