@@ -34,6 +34,46 @@ coordinates.push(c8);
 coordinates.push(c9);
 coordinates.push(c10);
 
+var voiceList = document.querySelector('#voiceList');
+var voices = [];
+var synth = window.speechSynthesis;
+
+PopulateVoices();
+        if(speechSynthesis !== undefined){
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+        }
+function PopulateVoices(){
+    voices = speechSynthesis.getVoices();
+    let i=0;
+    var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+    voiceList.innerHTML = '';
+       voices.forEach((voice)=>{
+      
+                var listItem = document.createElement('option');
+                listItem.textContent = voice.name;
+                listItem.setAttribute('data-lang', voice.lang);
+                listItem.setAttribute('data-name', voice.name);
+                voiceList.appendChild(listItem);
+            
+            i++;
+       });
+      voiceList.selectedIndex = selectedIndex;
+}
+
+function speak(text, rate, pitch, volume) {
+    var toSpeak = new SpeechSynthesisUtterance(text);
+     toSpeak.volume = volume; // From 0 to 1
+     toSpeak.rate = rate; // From 0.1 to 10
+     toSpeak.pitch = pitch; // From 0 to 2
+    var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+            voices.forEach((voice)=>{
+                if(voice.name === selectedVoiceName){
+                    toSpeak.voice = voice;
+                }
+            });
+            synth.speak(toSpeak);
+  }
+
 const description = [
     "This is a lung", "This is a brain", "This is a liver",
     "This is a heart", "This is a kidney","This is a stomach",
@@ -59,6 +99,17 @@ function getOrgan(index){
     para.appendChild(text);
     para.classList.add("para");
     box.appendChild(para);
+
+    // const button = document.createElement("button");
+    // var btext = document.createTextNode("Go Back");
+    // button.appendChild(btext);
+    // button.ontouchstart = ()=> {
+    //     humanbody.classList.remove("invisible");
+    //     box.remove(image);
+    //     box.remove(para);
+    //     box.remove(button);
+    // }
+    // box.appendChild(button);
 }
 
 document.addEventListener("touchstart", e => {
@@ -68,8 +119,21 @@ document.addEventListener("touchstart", e => {
     var found = coordinates.findIndex((organ, index)=> {
         if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
         {
-            humanbody.style.transform = "translate(-100%,-100%)";
-            getOrgan(index);
+            humanbody.classList.add("invisible");
+            if ('speechSynthesis' in window) {
+                let rate = 1, pitch = 2, volume = 1;
+                if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
+                    text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
+                else    
+                    text = description[index];
+                console.log(voiceList.selectedIndex);
+                console.log(voices[voiceList.selectedIndex]);
+                speak(text, rate, pitch, volume);
+              }else{
+                console.log(' Speech Synthesis Not Supported 😞'); 
+              }
+              getOrgan(index);
+
             return true;
         }
     })
