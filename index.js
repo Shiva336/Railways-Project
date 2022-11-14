@@ -105,12 +105,12 @@ function getOrgan(index){
 
     var btext = document.createTextNode("Go Back");
     button.appendChild(btext);
-    // button.ontouchstart = ()=> {
-    //     container2.classList.remove("invisible");
-    //     image.classList.add("invisible");
-    //     button.classList.add("invisible");
-    //     para.classList.add("invisible");
-    // }
+    button.ontouchstart = ()=> {
+        humanbody.classList.remove("invisible");
+        box.removeChild(image);
+        box.removeChild(para);
+        box.removeChild(button);
+    }
     box.appendChild(button);
 }
 
@@ -122,15 +122,12 @@ document.addEventListener("touchstart", e => {
         if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
         {
             humanbody.classList.add("invisible");
-
             if ('speechSynthesis' in window) {
                 let rate = 1, pitch = 2, volume = 1;
                 if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
                     text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
                 else    
                     text = description[index];
-                console.log(voiceList.selectedIndex);
-                console.log(voices[voiceList.selectedIndex]);
                 speak(text, rate, pitch, volume);
               }else{
                 console.log(' Speech Synthesis Not Supported 😞'); 
