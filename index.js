@@ -1,4 +1,6 @@
 const box = document.querySelector("div.box");
+const container = document.querySelector("div.container");
+const container2 = document.querySelector("div.container2");
 const humanbody= document.querySelector("img.humanbody");
 const lungs = document.getElementById("lungs");
 const brain = document.getElementById("brain");
@@ -86,30 +88,30 @@ const imageSource = [
     "./pictures/heart.jpg", "./pictures/kidney.jpg", "./pictures/stomach.jpg",
     "./pictures/pancreas.jpg", "./pictures/male.jpg", "./pictures/intestine.jpg",
     "./pictures/female.jpg",
-]
+];
 
 function getOrgan(index){
     const image = document.createElement("img");
+    const button = document.createElement("button");
+    const para = document.createElement("p");
     image.classList.add("organs");
     image.src = imageSource[index];
     box.appendChild(image);
 
-    const para = document.createElement("p");
     const text = document.createTextNode(description[index]);
     para.appendChild(text);
     para.classList.add("para");
     box.appendChild(para);
 
-    // const button = document.createElement("button");
-    // var btext = document.createTextNode("Go Back");
-    // button.appendChild(btext);
+    var btext = document.createTextNode("Go Back");
+    button.appendChild(btext);
     // button.ontouchstart = ()=> {
-    //     humanbody.classList.remove("invisible");
-    //     box.remove(image);
-    //     box.remove(para);
-    //     box.remove(button);
+    //     container2.classList.remove("invisible");
+    //     image.classList.add("invisible");
+    //     button.classList.add("invisible");
+    //     para.classList.add("invisible");
     // }
-    // box.appendChild(button);
+    box.appendChild(button);
 }
 
 document.addEventListener("touchstart", e => {
@@ -120,6 +122,7 @@ document.addEventListener("touchstart", e => {
         if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
         {
             humanbody.classList.add("invisible");
+
             if ('speechSynthesis' in window) {
                 let rate = 1, pitch = 2, volume = 1;
                 if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)

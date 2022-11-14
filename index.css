@@ -7,6 +7,12 @@
     height: 100vh;
     object-fit: cover;
 }
+.container2
+{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
 .organs
 {
     width: 50vw;
@@ -98,6 +104,6 @@
 }
 .invisible
 {
-    transform: translate(-100%,-100%); 
+    transform: translate(-1000%,-1000%); 
 }
 
