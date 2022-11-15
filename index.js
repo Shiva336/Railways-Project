@@ -114,7 +114,6 @@ function getOrgan(index){
     box.appendChild(button);
 }
 
-count = 0;
 document.addEventListener("touchstart", e => {
     if(count == 0)
     { 

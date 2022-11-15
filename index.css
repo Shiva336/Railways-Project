@@ -6,25 +6,27 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
+    position: fixed;
 }
 .organs
 {
-    width: 100vw;
-    height:100Vh;
-    position: absolute;
+    width: 50vw;
+    height:50Vh;
+    /* position: fixed; */
 }
 .humanbody
 {
     margin-left: 5vw;
     width: 90vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
 }
 .para
 {
     margin-top: 55vh;
     margin-left: 20vw ;
     width: 20vw;
+    /* position: fixed; */
 }
 #lungs
 {
@@ -37,12 +39,14 @@
     margin: 9.5vh;
     margin-top: 11.1vh;
     margin-left: 66.5vw;
+    background-color: red;
 }
 #liver
 {
     margin: 9.5vh;
     margin-top: 27vh;
     margin-left: 13.3vw;
+    background-color: red;
 }
 #heart
 {
@@ -91,17 +95,17 @@
 {
     width: 12vw;
     height: 15.7vh;
-    position: absolute;
+    position: relative;
     display: block;
     border-radius: 50%;
     display: inline-block;
 }
 .invisible
 {
-    transform: translate(-1000%,-1000%); 
+    transform: translate(-150%,-150%); 
 }
 .btn
 {
-    
+    position: fixed;
 }
 
