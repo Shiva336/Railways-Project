@@ -1,6 +1,5 @@
 const box = document.querySelector("div.box");
 const container = document.querySelector("div.container");
-const container2 = document.querySelector("div.container2");
 const humanbody= document.querySelector("img.humanbody");
 const lungs = document.getElementById("lungs");
 const brain = document.getElementById("brain");
@@ -39,7 +38,7 @@ coordinates.push(c10);
 var voiceList = document.querySelector('#voiceList');
 var voices = [];
 var synth = window.speechSynthesis;
-
+let count=0;
 PopulateVoices();
         if(speechSynthesis !== undefined){
             speechSynthesis.onvoiceschanged = PopulateVoices;
@@ -77,10 +76,10 @@ function speak(text, rate, pitch, volume) {
   }
 
 const description = [
-    "This is a lung", "This is a brain", "This is a liver",
-    "This is a heart", "This is a kidney","This is a stomach",
-    "This is a pancreas","This is a male reproductive system",
-    "This is an intestine","This is a female reproductive system"
+    "lungs", "brain", "liver",
+    "heart", "This is a kidney","stomach",
+    "pancreas","male reproductive system",
+    "intestine","female reproductive system"
 ];
 
 const imageSource = [
@@ -105,7 +104,8 @@ function getOrgan(index){
 
     var btext = document.createTextNode("Go Back");
     button.appendChild(btext);
-    button.ontouchstart = ()=> {
+    button.ontouchend = ()=> {
+        count=0;
         humanbody.classList.remove("invisible");
         box.removeChild(image);
         box.removeChild(para);
@@ -114,28 +114,31 @@ function getOrgan(index){
     box.appendChild(button);
 }
 
+count = 0;
 document.addEventListener("touchstart", e => {
-    let X = Math.floor(e.touches[0].clientX);
-    let Y = Math.floor(e.touches[0].clientY);
-    
-    var found = coordinates.findIndex((organ, index)=> {
-        if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
-        {
-            humanbody.classList.add("invisible");
-            if ('speechSynthesis' in window) {
-                let rate = 1, pitch = 2, volume = 1;
-                if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
-                    text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
-                else    
-                    text = description[index];
-                speak(text, rate, pitch, volume);
-              }else{
-                console.log(' Speech Synthesis Not Supported 😞'); 
-              }
-              getOrgan(index);
+    if(count == 0)
+    { 
+        count++;
+        let X = Math.floor(e.touches[0].clientX);
+        let Y = Math.floor(e.touches[0].clientY);
+        var found = coordinates.findIndex((organ, index)=> {
+            if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
+            {
+                humanbody.classList.add("invisible");
+                if ('speechSynthesis' in window) {
+                    let rate = 1, pitch = 2, volume = 1;
+                    if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
+                        text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
+                    else    
+                        text = description[index];
+                    speak(text, rate, pitch, volume);
+                }else{
+                    console.log(' Speech Synthesis Not Supported 😞'); 
+                }
+                getOrgan(index);
 
-            return true;
-        }
-    })
-    console.log(found);
-})
+                return true;
+            }
+        })
+    }   
+});
