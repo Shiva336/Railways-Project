@@ -1,4 +1,5 @@
 const box = document.querySelector("div.box");
+const sv = document.getElementById("selectvoice");
 const container = document.querySelector("div.container");
 const container2 = document.querySelector("div.container2");
 const humanbody= document.querySelector("img.humanbody");
@@ -12,6 +13,7 @@ const pancreas = document.getElementById("pancreas")
 const malerep = document.getElementById("malerep")
 const intestine = document.getElementById("intestine")
 const femrep = document.getElementById("femrep");
+const voiceId = document.getElementById("voiceList");
 
 const c1 = lungs.getBoundingClientRect();
 const c2 = brain.getBoundingClientRect();
@@ -24,6 +26,7 @@ const c8 = malerep.getBoundingClientRect();
 const c9 = intestine.getBoundingClientRect();
 const c10 = femrep.getBoundingClientRect();
 
+let count = 0;
 var coordinates = [];
 coordinates.push(c1);
 coordinates.push(c2);
@@ -72,25 +75,25 @@ function speak(text, rate, pitch, volume) {
                 if(voice.name === selectedVoiceName){
                     toSpeak.voice = voice;
                 }
-            });
-            synth.speak(toSpeak);
+            });            synth.speak(toSpeak);
   }
 
 const description = [
-    "This is a lung", "This is a brain", "This is a liver",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa maiores rerum saepe totam harum? Aspernatur eligendi provident, quisquam aliquam quas quia fugiat accusantium voluptates adipisci sint veniam facere repellat totam", "This is a brain", "This is a liver",
     "This is a heart", "This is a kidney","This is a stomach",
     "This is a pancreas","This is a male reproductive system",
     "This is an intestine","This is a female reproductive system"
 ];
 
 const imageSource = [
-    "./pictures/lungs.jpg", "./pictures/brain.jpg", "./pictures/liver.jpg",
+    "./pictures/lungs.jpg", "./pictures/brainz.gif", "./pictures/liver.jpg",
     "./pictures/heart.jpg", "./pictures/kidney.jpg", "./pictures/stomach.jpg",
-    "./pictures/pancreas.jpg", "./pictures/male.jpg", "./pictures/intestine.jpg",
+    "./pictures/pancreas.jpg", "./pictures/sex.jpg", "./pictures/intestine.jpg",
     "./pictures/female.jpg",
 ];
 
 function getOrgan(index){
+    box.style.margin = "0";
     const image = document.createElement("img");
     const button = document.createElement("button");
     const para = document.createElement("p");
@@ -105,7 +108,11 @@ function getOrgan(index){
 
     var btext = document.createTextNode("Go Back");
     button.appendChild(btext);
-    button.ontouchstart = ()=> {
+    button.classList.add("btn");
+    button.ontouchend = ()=> {
+        container2.appendChild(sv); container2.appendChild(voiceList); 
+        box.style.margin = "9.5vh";
+        count = 0;
         humanbody.classList.remove("invisible");
         box.removeChild(image);
         box.removeChild(para);
@@ -115,12 +122,14 @@ function getOrgan(index){
 }
 
 document.addEventListener("touchstart", e => {
+    if(count == 0) {
     let X = Math.floor(e.touches[0].clientX);
     let Y = Math.floor(e.touches[0].clientY);
     
     var found = coordinates.findIndex((organ, index)=> {
         if((X >= organ.left && X <= organ.right && Y >= organ.top && Y <= organ.bottom ))
         {
+            count++;
             humanbody.classList.add("invisible");
             if ('speechSynthesis' in window) {
                 let rate = 1, pitch = 2, volume = 1;
@@ -132,10 +141,16 @@ document.addEventListener("touchstart", e => {
               }else{
                 console.log(' Speech Synthesis Not Supported 😞'); 
               }
-              getOrgan(index);
 
+              container2.removeChild(voiceId); container2.removeChild(sv);
+            //   setTimeout(()=> {
+            //     getOrgan(index);
+            // },1000);
+
+            getOrgan(index);
             return true;
         }
     })
+}
     console.log(found);
-})
+});
