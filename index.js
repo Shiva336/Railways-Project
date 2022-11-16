@@ -79,16 +79,16 @@ function speak(text, rate, pitch, volume) {
   }
 
 const description = [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa maiores rerum saepe totam harum? Aspernatur eligendi provident, quisquam aliquam quas quia fugiat accusantium voluptates adipisci sint veniam facere repellat totam", "This is a brain", "This is a liver",
+    "Lungs", "This is a brain", "This is a liver",
     "This is a heart", "This is a kidney","This is a stomach",
     "This is a pancreas","This is a male reproductive system",
     "This is an intestine","This is a female reproductive system"
 ];
 
 const imageSource = [
-    "./pictures/lungs.jpg", "./pictures/brainz.gif", "./pictures/liver.jpg",
+    "./pictures/lungs.jpg", "./pictures/brain.gif", "./pictures/liver.jpg",
     "./pictures/heart.jpg", "./pictures/kidney.jpg", "./pictures/stomach.jpg",
-    "./pictures/pancreas.jpg", "./pictures/sex.jpg", "./pictures/intestine.jpg",
+    "./pictures/pancreas.jpg", "./pictures/male.jpg", "./pictures/intestine.jpg",
     "./pictures/female.jpg",
 ];
 
@@ -109,7 +109,7 @@ function getOrgan(index){
     var btext = document.createTextNode("Go Back");
     button.appendChild(btext);
     button.classList.add("btn");
-    button.ontouchend = ()=> {
+    button.ontouchstart = ()=> {
         container2.appendChild(sv); container2.appendChild(voiceList); 
         box.style.margin = "9.5vh";
         count = 0;
