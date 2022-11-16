@@ -101,7 +101,7 @@ function getOrgan(index){
     image.src = imageSource[index];
     box.appendChild(image);
 
-    const text = document.createTextNode(description[index]);
+    const text = document.createTextNode(LungText);
     para.appendChild(text);
     para.classList.add("para");
     box.appendChild(para);
@@ -112,6 +112,7 @@ function getOrgan(index){
     button.ontouchstart = ()=> {
         container2.appendChild(sv); container2.appendChild(voiceList); 
         box.style.margin = "9.5vh";
+        speechSynthesis.cancel();
         count = 0;
         humanbody.classList.remove("invisible");
         box.removeChild(image);
@@ -133,24 +134,26 @@ document.addEventListener("touchstart", e => {
             humanbody.classList.add("invisible");
             if ('speechSynthesis' in window) {
                 let rate = 1, pitch = 2, volume = 1;
-                if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
-                    text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
-                else    
-                    text = description[index];
+                // if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
+                //     text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
+                // else    
+                text = LungText;
                 speak(text, rate, pitch, volume);
               }else{
                 console.log(' Speech Synthesis Not Supported 😞'); 
               }
 
               container2.removeChild(voiceId); container2.removeChild(sv);
-            //   setTimeout(()=> {
-            //     getOrgan(index);
-            // },1000);
-
-            getOrgan(index);
+              setTimeout(()=> {
+                getOrgan(index);
+            },1000);
             return true;
         }
     })
 }
     console.log(found);
 });
+
+
+const LungText = "The lungs are a pair of spongy, air-filled organs located on either side of the chest. The trachea conducts inhaled air into the lungs through its tubular branches, called bronchi. The bronchi then divide into smaller and smaller branches (bronchioles), finally becoming microscopic. The bronchioles eventually end in clusters of microscopic air sacs called alveoli. In the alveoli, oxygen from the air is absorbed into the blood. Carbon dioxide, a waste product of metabolism, travels from the blood to the alveoli, where it can be exhaled. Between the alveoli is a thin layer of cells called the interstitium, which contains blood vessels and cells that help support the alveoli. The lungs are covered by a thin tissue layer called the pleura. The same kind of thin tissue lines the inside of the chest cavity -- also called pleura. A thin layer of fluid acts as a lubricant allowing the lungs to slip smoothly as they expand and contract with each breath.";
+const KidneyText = "";
