@@ -79,16 +79,22 @@ function speak(text, rate, pitch, volume) {
   }
 
 const description = [
-    "Lungs", "This is a brain", "This is a liver",
-    "This is a heart", "This is a kidney","This is a stomach",
-    "This is a pancreas","This is a male reproductive system",
-    "This is an intestine","This is a female reproductive system"
+    "The lungs are a pair of spongy, air-filled organs located on either side of the chest (thorax). The trachea (windpipe) conducts inhaled air into the lungs through its tubular branches, called bronchi. ", 
+    "A brain is an organ that serves as the center of the nervous system in all vertebrate and most invertebrate animals. It is located in the head, usually close to the sensory organs for senses such as vision.", 
+    "The liver is a large, meaty organ that sits on the right side of the belly. Weighing about 3 pounds, the liver is reddish-brown in color and feels rubbery to the touch. Normally you can't feel the liver, because it's protected by the rib cage.",
+    "The heart is a muscular organ about the size of a fist, located just behind and slightly left of the breastbone. The heart pumps blood through the network of arteries and veins called the cardiovascular system.", 
+    "The kidneys are a pair of bean-shaped organs on either side of your spine, below your ribs and behind your belly. Each kidney is about 4 or 5 inches long, roughly the size of a large fist.",
+    "The stomach is a muscular organ located on the left side of the upper abdomen. The stomach receives food from the esophagus. As food reaches the end of the esophagus, it enters the stomach through a muscular valve called the lower esophageal sphincter.",
+    "The pancreas is about 6 inches long and sits across the back of the abdomen, behind the stomach. The head of the pancreas is on the right side of the abdomen and is connected to the duodenum.",
+    "The male reproductive system is mostly located outside of the body. These external organs include the penis, scrotum and testicles. Internal organs include the vas deferens, prostate and urethra.",
+    "The intestines are a long, continuous tube running from the stomach to the anus. Most absorption of nutrients and water happen in the intestines. The intestines include the small intestine, large intestine, and rectum.",
+    "The female reproductive organs include several key structures, such as the ovaries, uterus, vagina, and vulva. These organs are involved in fertility, conception, pregnancy, and childbirth.emale reproductive system"
 ];
 
 const imageSource = [
-    "./pictures/lungs.jpg", "./pictures/brain.gif", "./pictures/liver.jpg",
-    "./pictures/heart.jpg", "./pictures/kidney.jpg", "./pictures/stomach.jpg",
-    "./pictures/pancreas.jpg", "./pictures/male.jpg", "./pictures/intestine.jpg",
+    "./pictures/gif/lungs.gif", "./pictures/brain.gif", "./pictures/liver.jpg",
+    "./pictures/gif/heart.gif", "./pictures/kidney.jpg", "./pictures/gif/stomach.gif",
+    "./pictures/gif/pancreas.gif", "./pictures/male.jpg", "./pictures/gif/intenstine.gif",
     "./pictures/female.jpg",
 ];
 
@@ -101,7 +107,7 @@ function getOrgan(index){
     image.src = imageSource[index];
     box.appendChild(image);
 
-    const text = document.createTextNode(LungText);
+    const text = document.createTextNode(description[index]);
     para.appendChild(text);
     para.classList.add("para");
     box.appendChild(para);
@@ -109,7 +115,7 @@ function getOrgan(index){
     var btext = document.createTextNode("Go Back");
     button.appendChild(btext);
     button.classList.add("btn");
-    button.ontouchstart = ()=> {
+    button.addEventListener("touchstart", e=> {
         container2.appendChild(sv); container2.appendChild(voiceList); 
         box.style.margin = "9.5vh";
         speechSynthesis.cancel();
@@ -118,7 +124,7 @@ function getOrgan(index){
         box.removeChild(image);
         box.removeChild(para);
         box.removeChild(button);
-    }
+    });
     box.appendChild(button);
 }
 
@@ -133,27 +139,19 @@ document.addEventListener("touchstart", e => {
             count++;
             humanbody.classList.add("invisible");
             if ('speechSynthesis' in window) {
-                let rate = 1, pitch = 2, volume = 1;
-                // if(voiceList.selectedIndex==1||voiceList.selectedIndex==2)
-                //     text = "ശ്വാസകോശം ഒരു സ്പോഞ്ച് പോലെയാണ്";
-                // else    
-                text = LungText;
+                let rate = 1, pitch = 2, volume = 1; 
+                text = description[index];
                 speak(text, rate, pitch, volume);
               }else{
                 console.log(' Speech Synthesis Not Supported 😞'); 
               }
 
               container2.removeChild(voiceId); container2.removeChild(sv);
-              setTimeout(()=> {
-                getOrgan(index);
-            },1000);
+
+            getOrgan(index);
             return true;
         }
     })
 }
     console.log(found);
 });
-
-
-const LungText = "The lungs are a pair of spongy, air-filled organs located on either side of the chest. The trachea conducts inhaled air into the lungs through its tubular branches, called bronchi. The bronchi then divide into smaller and smaller branches (bronchioles), finally becoming microscopic. The bronchioles eventually end in clusters of microscopic air sacs called alveoli. In the alveoli, oxygen from the air is absorbed into the blood. Carbon dioxide, a waste product of metabolism, travels from the blood to the alveoli, where it can be exhaled. Between the alveoli is a thin layer of cells called the interstitium, which contains blood vessels and cells that help support the alveoli. The lungs are covered by a thin tissue layer called the pleura. The same kind of thin tissue lines the inside of the chest cavity -- also called pleura. A thin layer of fluid acts as a lubricant allowing the lungs to slip smoothly as they expand and contract with each breath.";
-const KidneyText = "";
